@@ -2,13 +2,19 @@
 
 class Solution:
     def select(self, arr, i):
-        return min(arr[i:])
+        minimum = i
+        for j in range(i + 1, len(arr)):
+            if arr[minimum] > arr[j]:
+                minimum = j
+        return minimum
 
     def selectionSort(self, arr, n):
-        for i in range(n):
-            num = self.select(arr, i)
-            arr[arr.index(num)] = arr[i]
-            arr[i] = num
+        for i in range(n - 1):
+            smallest = self.select(arr, i)
+            if smallest != i:
+                temp = arr[smallest]
+                arr[smallest] = arr[i]
+                arr[i] = temp
 
 
 # {
