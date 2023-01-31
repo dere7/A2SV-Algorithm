@@ -8,13 +8,8 @@ class ListNode:
 
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if head:
-            temp = head
-            length = 0
-            while temp:
-                length += 1
-                temp = temp.next
-            mid = length // 2
-            for _ in range(mid):
-                head = head.next
-            return head
+        fast=slow=head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+        return slow
