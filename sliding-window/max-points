@@ -1,0 +1,28 @@
+from typing import List
+
+class Solution:
+    def maxScore(self, cardPoints: List[int], k: int) -> int:
+        n = len(cardPoints)
+        totSum = sum(cardPoints)
+        if k >= n:
+            return totSum
+
+        start = end = totPoints = 0
+        minPoints = totSum
+
+        while end < n:
+            while end - start + 1 <= n - k:
+                totPoints += cardPoints[end]
+                if end - start + 1 == n - k:
+                    minPoints = min(totPoints, minPoints)
+                end += 1
+
+            while end - start + 1 > n - k:
+                totPoints -= cardPoints[start]
+                start += 1
+
+        return totSum - minPoints                     
+
+cardPoints = [1,2,3,4,5,6,1]
+k = 3
+print(Solution().maxScore(cardPoints, k))
